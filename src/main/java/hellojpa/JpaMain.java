@@ -19,16 +19,20 @@ public class JpaMain {
 
         try {
 
-            // Member findMember = em.find(Member.class, 1L);
-            // findMember.setName("HelloJPA");
+            // 비영속
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("HelloJPA");
 
-            // JPQL :: 테이블이 아닌 객체를 대상으로
-            // => 객체 지향 SQL
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
+            // 영속
+            System.out.println("=== BEFORE ===");
+            em.persist(member);
+            System.out.println("=== AFTER ===");
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            Member findMember = em.find(Member.class, 101L);
+
+            System.out.println("findMember.id = " + findMember.getId());
+            System.out.println("findMember.name = " + findMember.getName());
 
             tx.commit();
         } catch (Exception e) {
