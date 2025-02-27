@@ -7,7 +7,10 @@ import java.util.Date;
 @Entity
 public class Member {
 
+    // @Id : 직접 할당
+    // @GeneratedValue : 자동 생성
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // updatable = false : 업데이트 되지 않음
@@ -17,24 +20,6 @@ public class Member {
     @Column(name = "name", updatable = false)
     private String userName;
 
-    private Integer age;
-
-    // EnumType.ORNiDAL : enum의 순서 저장
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-
-    @Transient  // DB 반영 X
-    private int temp;
-
     public Member() {
     }
 
@@ -42,55 +27,15 @@ public class Member {
         return id;
     }
 
-    public String getName() {
+    public String getUserName() {
         return userName;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.userName = name;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
